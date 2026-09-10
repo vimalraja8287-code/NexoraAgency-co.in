@@ -1,0 +1,223 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-3xl: calc(var(--radius) + 18px);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-glow: var(--glow);
+  --color-glow-secondary: var(--glow-secondary);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+}
+
+:root {
+  --radius: 0.85rem;
+  /* Deep Nexora Navy Blue matching PDF */
+  --background: #0a1128;
+  --foreground: #f8fafc;
+  
+  --card: rgba(16, 26, 62, 0.7);
+  --card-foreground: #f8fafc;
+  
+  --popover: rgba(16, 26, 62, 0.95);
+  --popover-foreground: #f8fafc;
+  
+  /* Nexora Electric Cyan from Logo */
+  --primary: #00d2c8;
+  --primary-foreground: #0a1128;
+  
+  --secondary: #162456;
+  --secondary-foreground: #e2e8f0;
+  
+  --muted: #131e42;
+  --muted-foreground: #94a3b8;
+  
+  /* Nexora Royal Blue from Logo */
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  
+  --border: rgba(255, 255, 255, 0.12);
+  --input: #101a3e;
+  --ring: rgba(0, 210, 200, 0.5);
+  
+  --glow: #00d2c8;
+  --glow-secondary: #2563eb;
+  --surface: rgba(16, 26, 62, 0.6);
+  --surface-hover: rgba(26, 42, 98, 0.8);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: #0a1128;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    /* PDF Signature Fine Dot Grid Overlay */
+    background-image: 
+      radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+      radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.25) 0%, rgba(10, 17, 40, 0) 70%),
+      radial-gradient(circle at 85% 60%, rgba(0, 210, 200, 0.15) 0%, rgba(10, 17, 40, 0) 60%);
+    background-size: 24px 24px, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(16, 26, 62, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, rgba(20, 33, 78, 0.65), rgba(12, 20, 48, 0.5));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(0, 210, 200, 0.45);
+    box-shadow: 0 20px 50px -10px rgba(0, 210, 200, 0.2), 0 0 20px rgba(37, 99, 235, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .glass-strong {
+    background: rgba(12, 20, 48, 0.85);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* PDF Preheader style: cyan bar prefix + tracking-widest text */
+  .pdf-dash {
+    display: inline-block;
+    width: 20px;
+    height: 3px;
+    background: #00d2c8;
+    border-radius: 2px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  /* Logo Cyan-to-Blue Text Gradient */
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, #00d2c8 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-cyan {
+    background: linear-gradient(135deg, #00d2c8 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #00d2c8 0%, #2563eb 100%);
+    box-shadow: 0 4px 20px rgba(0, 210, 200, 0.35);
+  }
+
+  .gradient-primary:hover {
+    background: linear-gradient(135deg, #14e6dc 0%, #3b82f6 100%);
+    box-shadow: 0 6px 30px rgba(0, 210, 200, 0.5);
+  }
+
+  /* Cyan Icon Badge Button from PDF */
+  .cyan-icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: rgba(0, 210, 200, 0.12);
+    color: #00d2c8;
+    border: 1px solid rgba(0, 210, 200, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .cyan-icon-btn:hover {
+    background: #00d2c8;
+    color: #0a1128;
+    box-shadow: 0 0 20px rgba(0, 210, 200, 0.4);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 25px rgba(0, 210, 200, 0.2), inset 0 0 15px rgba(0, 210, 200, 0.1);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1128;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00d2c8;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
